@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Multi-Item Calorie Calculator</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f0f0f0;
+      padding: 1rem;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .item {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr auto;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    input {
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+      border: none;
+      background: #4caf50;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #45a049;
+    }
+
+    .remove-btn {
+      background: #f44336;
+    }
+
+    .remove-btn:hover {
+      background: #e53935;
+    }
+
+    .portion {
+      margin-top: 1rem;
+    }
+
+    #total {
+      margin-top: 1.5rem;
+      font-weight: bold;
+      text-align: center;
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 600px) {
+      .item {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Calorie Calculator</h2>
+    <form id="calcForm">
+      <div id="items"></div>
+      <button type="button" onclick="addItem()">+ Add Item</button>
+
+      <div class="portion">
+        <input type="number" id="portionSize" placeholder="Portion size in grams (optional)" min="1" style="width: 100%; margin-top: 1rem;" />
+      </div>
+
+      <button type="submit" style="margin-top: 1rem;">Calculate Total</button>
+    </form>
+
+    <div id="total">Total Calories: 0 kcal</div>
+  </div>
+
+  <script>
+    function addItem(name = '', weight = '', calories = '') {
+      const itemDiv = document.createElement('div');
+      itemDiv.className = 'item';
+
+      itemDiv.innerHTML = `
+        <input type="text" placeholder="Item name" value="${name}" required>
+        <input type="number" placeholder="Weight (g)" value="${weight}" min="0" required>
+        <input type="number" placeholder="Calories per 100g" value="${calories}" min="0" required>
+        <button type="button" class="remove-btn" onclick="this.parentElement.remove()">✕</button>
+      `;
+
+      document.getElementById('items').appendChild(itemDiv);
+    }
+
+    document.getElementById('calcForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const items = document.querySelectorAll('#items .item');
+      let totalCalories = 0;
+      let totalWeight = 0;
+
+      items.forEach(item => {
+        const inputs = item.querySelectorAll('input');
+        const weight = parseFloat(inputs[1].value);
+        const calPer100g = parseFloat(inputs[2].value);
+
+        if (!isNaN(weight) && !isNaN(calPer100g)) {
+          totalCalories += (weight * calPer100g) / 100;
+          totalWeight += weight;
+        }
+      });
+
+      const portionSize = parseFloat(document.getElementById('portionSize').value);
+      let message = `Total Calories: ${totalCalories.toFixed(2)} kcal`;
+
+      if (!isNaN(portionSize) && portionSize > 0 && totalWeight > 0) {
+        const portionCalories = (totalCalories * portionSize) / totalWeight;
+        message += `<br>Calories per ${portionSize}g portion: ${portionCalories.toFixed(2)} kcal`;
+      }
+
+      document.getElementById('total').innerHTML = message;
+    });
+
+    // Add one default item
+    addItem();
+  </script>
+
+</body>
+</html>
