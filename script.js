@@ -34,7 +34,7 @@ function addItem(name = '', weight = '', calories = '') {
   
     if (!isNaN(portionSize) && portionSize > 0 && totalWeight > 0) {
       const portionCalories = (totalCalories * portionSize) / totalWeight;
-      message += `<br>🍕 Ur ${portionSize}g Zlice: ${portionCalories.toFixed(2)} kcal`;
+      message += `<br>🍕 Ur ${portionSize}g Slice: ${portionCalories.toFixed(2)} kcal`;
     }
   
     document.getElementById('total').innerHTML = message;
