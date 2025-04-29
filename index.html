@@ -2,97 +2,140 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <title>💾 1337 CALZ CALCULATR 💾</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Multi-Item Calorie Calculator</title>
   <style>
     body {
-      font-family: sans-serif;
-      background: #f0f0f0;
+      background: black;
+      color: #39ff14;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
       padding: 1rem;
+      animation: blinkBG 5s infinite alternate;
+    }
+
+    @keyframes blinkBG {
+      0% { background-color: black; }
+      100% { background-color: #000022; }
     }
 
     .container {
-      max-width: 600px;
+      max-width: 800px;
       margin: auto;
-      background: white;
-      padding: 1.5rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      background: linear-gradient(to bottom, #001100, #000);
+      padding: 2rem;
+      border: 5px dashed lime;
+      border-radius: 15px;
+      box-shadow: 0 0 30px #0f0;
     }
 
-    h2 {
+    h1 {
       text-align: center;
+      font-size: 3rem;
+      color: #ff00ff;
+      text-shadow: 2px 2px #00ffff;
+    }
+
+    .leet-tag {
+      text-align: center;
+      font-size: 1.2rem;
       margin-bottom: 1rem;
+      color: #00ffff;
     }
 
     .item {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr auto;
+      display: flex;
+      flex-wrap: wrap;
       gap: 0.5rem;
       margin-bottom: 1rem;
     }
 
     input {
       padding: 0.5rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
+      font-size: 1rem;
+      border: 2px dashed #ff0;
+      background-color: black;
+      color: #0f0;
+      border-radius: 8px;
+      flex: 1;
+      min-width: 100px;
     }
 
     button {
       padding: 0.5rem 1rem;
-      border: none;
-      background: #4caf50;
-      color: white;
-      border-radius: 4px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      font-family: 'Comic Sans MS', cursive;
+      border: 3px groove cyan;
+      border-radius: 6px;
+      background: linear-gradient(to bottom right, #222, #0f0);
+      color: magenta;
       cursor: pointer;
-    }
-
-    button:hover {
-      background: #45a049;
+      box-shadow: 0 0 8px cyan;
     }
 
     .remove-btn {
-      background: #f44336;
-    }
-
-    .remove-btn:hover {
-      background: #e53935;
-    }
-
-    .portion {
-      margin-top: 1rem;
+      background: linear-gradient(to bottom right, #000, #800);
+      color: red;
+      border-color: red;
     }
 
     #total {
       margin-top: 1.5rem;
       font-weight: bold;
+      font-size: 1.6rem;
+      color: #00ffff;
       text-align: center;
+      text-shadow: 0 0 10px #0ff;
+    }
+
+    marquee {
       font-size: 1.2rem;
+      color: hotpink;
+      margin-bottom: 1rem;
+    }
+
+    pre.ascii {
+      color: #f0f;
+      font-family: monospace;
+      text-align: center;
+      font-size: 14px;
+      margin-bottom: 1rem;
     }
 
     @media (max-width: 600px) {
       .item {
-        grid-template-columns: 1fr;
+        flex-direction: column;
       }
     }
   </style>
 </head>
 <body>
+  <marquee scrollamount="10">🔥 W3lc0m3 2 teh 1337 CALZ ZONE 🔥 | Z3r0 R3gr3tz, Max Flav0r!!!1!! ⚡</marquee>
 
   <div class="container">
-    <h2>Calorie Calculator</h2>
+    <h1>🔥 1337 CALORIEZ 4 LYFE 🔥</h1>
+    <div class="leet-tag">~*~ [ 💾 TRACK UR SNAX LIEK A H4X0R 💾 ] ~*~</div>
+
+    <pre class="ascii">
+    .--.      .--.
+   : (\ ". _.' /) :
+    '.    \_/    .'
+     /'._.--.--._'\
+   ((( (_)    (_) )))
+    </pre>
+
     <form id="calcForm">
       <div id="items"></div>
-      <button type="button" onclick="addItem()">+ Add Item</button>
+      <button type="button" onclick="addItem()">➕ Add SN4X</button>
 
-      <div class="portion">
-        <input type="number" id="portionSize" placeholder="Portion size in grams (optional)" min="1" style="width: 100%; margin-top: 1rem;" />
+      <div style="margin-top:1rem;">
+        <input type="number" id="portionSize" placeholder="Portion size in grams (optz)" min="1" />
       </div>
 
-      <button type="submit" style="margin-top: 1rem;">Calculate Total</button>
+      <button type="submit" style="margin-top: 1rem;">💥 CALCZ IT 💥</button>
     </form>
 
-    <div id="total">Total Calories: 0 kcal</div>
+    <div id="total">Total Calz: 0 kcal</div>
   </div>
 
   <script>
@@ -101,10 +144,10 @@
       itemDiv.className = 'item';
 
       itemDiv.innerHTML = `
-        <input type="text" placeholder="Item name" value="${name}" required>
-        <input type="number" placeholder="Weight (g)" value="${weight}" min="0" required>
-        <input type="number" placeholder="Calories per 100g" value="${calories}" min="0" required>
-        <button type="button" class="remove-btn" onclick="this.parentElement.remove()">✕</button>
+        <input type="text" placeholder="Snax name" value="${name}" required>
+        <input type="number" placeholder="Grams" value="${weight}" min="0" required>
+        <input type="number" placeholder="Calz per 100g" value="${calories}" min="0" required>
+        <button type="button" class="remove-btn" onclick="this.parentElement.remove()">❌</button>
       `;
 
       document.getElementById('items').appendChild(itemDiv);
@@ -128,17 +171,16 @@
       });
 
       const portionSize = parseFloat(document.getElementById('portionSize').value);
-      let message = `Total Calories: ${totalCalories.toFixed(2)} kcal`;
+      let message = `⚡ Total Calz: ${totalCalories.toFixed(2)} kcal`;
 
       if (!isNaN(portionSize) && portionSize > 0 && totalWeight > 0) {
         const portionCalories = (totalCalories * portionSize) / totalWeight;
-        message += `<br>Calories per ${portionSize}g portion: ${portionCalories.toFixed(2)} kcal`;
+        message += `<br>🍕 Ur ${portionSize}g Zlice: ${portionCalories.toFixed(2)} kcal`;
       }
 
       document.getElementById('total').innerHTML = message;
     });
 
-    // Add one default item
     addItem();
   </script>
 
