@@ -4,113 +4,18 @@
   <meta charset="UTF-8" />
   <title>💾 1337 CALZ CALCULATR 💾</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <style>
-    body {
-      background: black;
-      color: #39ff14;
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      padding: 1rem;
-      animation: blinkBG 5s infinite alternate;
-    }
-
-    @keyframes blinkBG {
-      0% { background-color: black; }
-      100% { background-color: #000022; }
-    }
-
-    .container {
-      max-width: 800px;
-      margin: auto;
-      background: linear-gradient(to bottom, #001100, #000);
-      padding: 2rem;
-      border: 5px dashed lime;
-      border-radius: 15px;
-      box-shadow: 0 0 30px #0f0;
-    }
-
-    h1 {
-      text-align: center;
-      font-size: 3rem;
-      color: #ff00ff;
-      text-shadow: 2px 2px #00ffff;
-    }
-
-    .leet-tag {
-      text-align: center;
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-      color: #00ffff;
-    }
-
-    .item {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-    }
-
-    input {
-      padding: 0.5rem;
-      font-size: 1rem;
-      border: 2px dashed #ff0;
-      background-color: black;
-      color: #0f0;
-      border-radius: 8px;
-      flex: 1;
-      min-width: 100px;
-    }
-
-    button {
-      padding: 0.5rem 1rem;
-      font-size: 1.2rem;
-      font-weight: bold;
-      font-family: 'Comic Sans MS', cursive;
-      border: 3px groove cyan;
-      border-radius: 6px;
-      background: linear-gradient(to bottom right, #222, #0f0);
-      color: magenta;
-      cursor: pointer;
-      box-shadow: 0 0 8px cyan;
-    }
-
-    .remove-btn {
-      background: linear-gradient(to bottom right, #000, #800);
-      color: red;
-      border-color: red;
-    }
-
-    #total {
-      margin-top: 1.5rem;
-      font-weight: bold;
-      font-size: 1.6rem;
-      color: #00ffff;
-      text-align: center;
-      text-shadow: 0 0 10px #0ff;
-    }
-
-    marquee {
-      font-size: 1.2rem;
-      color: hotpink;
-      margin-bottom: 1rem;
-    }
-
-    pre.ascii {
-      color: #f0f;
-      font-family: monospace;
-      text-align: center;
-      font-size: 14px;
-      margin-bottom: 1rem;
-    }
-
-    @media (max-width: 600px) {
-      .item {
-        flex-direction: column;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
 </head>
 <body>
-  <marquee scrollamount="10">🔥 W3lc0m3 2 teh 1337 CALZ ZONE 🔥 | Z3r0 R3gr3tz, Max Flav0r!!!1!! ⚡</marquee>
+
+  <!-- 🔊 XTREME MIDI MODE -->
+  <bgsound src="https://files.catbox.moe/7p97wf.mid" loop="infinite" autostart="true" />
+  <audio autoplay loop hidden>
+    <source src="https://files.catbox.moe/7p97wf.mid" type="audio/midi">
+  </audio>
+
+  <marquee scrollamount="10">🔥 W3lc0m3 2 teh 1337 CALZ ZONE 🔥 | Z3r0 R3gr3tz, Max Flav0r ⚡</marquee>
 
   <div class="container">
     <h1>🔥 1337 CALORIEZ 4 LYFE 🔥</h1>
@@ -137,52 +42,6 @@
 
     <div id="total">Total Calz: 0 kcal</div>
   </div>
-
-  <script>
-    function addItem(name = '', weight = '', calories = '') {
-      const itemDiv = document.createElement('div');
-      itemDiv.className = 'item';
-
-      itemDiv.innerHTML = `
-        <input type="text" placeholder="Snax name" value="${name}" required>
-        <input type="number" placeholder="Grams" value="${weight}" min="0" required>
-        <input type="number" placeholder="Calz per 100g" value="${calories}" min="0" required>
-        <button type="button" class="remove-btn" onclick="this.parentElement.remove()">❌</button>
-      `;
-
-      document.getElementById('items').appendChild(itemDiv);
-    }
-
-    document.getElementById('calcForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-      const items = document.querySelectorAll('#items .item');
-      let totalCalories = 0;
-      let totalWeight = 0;
-
-      items.forEach(item => {
-        const inputs = item.querySelectorAll('input');
-        const weight = parseFloat(inputs[1].value);
-        const calPer100g = parseFloat(inputs[2].value);
-
-        if (!isNaN(weight) && !isNaN(calPer100g)) {
-          totalCalories += (weight * calPer100g) / 100;
-          totalWeight += weight;
-        }
-      });
-
-      const portionSize = parseFloat(document.getElementById('portionSize').value);
-      let message = `⚡ Total Calz: ${totalCalories.toFixed(2)} kcal`;
-
-      if (!isNaN(portionSize) && portionSize > 0 && totalWeight > 0) {
-        const portionCalories = (totalCalories * portionSize) / totalWeight;
-        message += `<br>🍕 Ur ${portionSize}g Zlice: ${portionCalories.toFixed(2)} kcal`;
-      }
-
-      document.getElementById('total').innerHTML = message;
-    });
-
-    addItem();
-  </script>
 
 </body>
 </html>
